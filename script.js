@@ -1,6 +1,7 @@
 // ===========================
 // MATRIX CANVAS BACKGROUND
 // ===========================
+console.log("JS LOADED ✅");
 const canvas = document.getElementById('matrix-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -123,49 +124,68 @@ document.querySelectorAll('.skill-category').forEach(el => barObserver.observe(e
 // CONTACT FORM SUBMISSION
 // ===========================
 
-const BACKEND_URL = 'https://jedid-portfolio.onrender.com/api/contact';
+// ===========================
+// CONTACT FORM FIXED
+// ===========================
 
-const form = document.getElementById('contactForm');
-const submitBtn = document.getElementById('submitBtn');
-const btnText = document.getElementById('btnText');
-const formStatus = document.getElementById('formStatus');
+document.addEventListener("DOMContentLoaded", () => {
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+  console.log("JS LOADED ✅");
 
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
+  const form = document.getElementById('contactForm');
 
-  if (!name || !email || !message) {
-    showStatus('Please fill in all fields.', 'error');
+  if (!form) {
+    console.error("Form not found ❌");
     return;
   }
 
-  submitBtn.disabled = true;
-  btnText.textContent = 'Sending...';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // 🚨 THIS STOPS PAGE REFRESH
 
-  try {
-    const response = await fetch(BACKEND_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message }),
-    });
+    console.log("Form submit intercepted ✅");
 
-    const data = await response.json();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
 
-    if (response.ok) {
-      showStatus('✓ Message sent successfully!', 'success');
-      form.reset();
-    } else {
-      showStatus(`Error: ${data.error || 'Something went wrong.'}`, 'error');
+    const formStatus = document.getElementById('formStatus');
+    const btnText = document.getElementById('btnText');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (!name || !email || !message) {
+      formStatus.textContent = "Fill all fields";
+      return;
     }
-  } catch (err) {
-    showStatus('Connection error. Please try again later.', 'error');
-  } finally {
+
+    submitBtn.disabled = true;
+    btnText.textContent = "Sending...";
+
+    try {
+      const res = await fetch('https://jedid-portfolio.onrender.com/api/contact', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        formStatus.textContent = "✅ Message sent!";
+        form.reset();
+      } else {
+        formStatus.textContent = "❌ Error sending message";
+      }
+
+    } catch (err) {
+      formStatus.textContent = "❌ Server error";
+    }
+
     submitBtn.disabled = false;
-    btnText.textContent = 'Send Message →';
-  }
+    btnText.textContent = "Send Message →";
+  });
+
 });
   // Disable button and show loading
   submitBtn.disabled = true;
