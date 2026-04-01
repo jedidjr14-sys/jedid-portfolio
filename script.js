@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault(); // 🚨 THIS STOPS PAGE REFRESH
+    e.preventDefault();
 
     console.log("Form submit intercepted ✅");
 
@@ -169,8 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ name, email, message })
       });
 
-      const data = await res.json();
-
       if (res.ok) {
         formStatus.textContent = "✅ Message sent!";
         form.reset();
@@ -187,40 +185,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-  // Disable button and show loading
-  submitBtn.disabled = true;
-  btnText.textContent = 'Sending...';
-  formStatus.className = 'form-status';
-  formStatus.textContent = '';
-
-  try {
-    const response = await fetch(BACKEND_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message }),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      showStatus('✓ Message sent successfully! I\'ll get back to you soon.', 'success');
-      form.reset();
-    } else {
-      showStatus(`Error: ${data.error || 'Something went wrong.'}`, 'error');
-    }
-  } catch (err) {
-    // If backend isn't connected yet, show a helpful dev message
-    if (BACKEND_URL.includes('YOUR-BACKEND-NAME')) {
-      showStatus('⚙️ Backend not connected yet. Deploy your Node.js server first!', 'error');
-    } else {
-      showStatus('Connection error. Please try again later.', 'error');
-    }
-  } finally {
-    submitBtn.disabled = false;
-    btnText.textContent = 'Send Message →';
-  }
-});
-
 function showStatus(msg, type) {
   formStatus.textContent = msg;
   formStatus.className = `form-status ${type}`;
