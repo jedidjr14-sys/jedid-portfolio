@@ -1,0 +1,108 @@
+# .github/workflows/deploy.yml
+# GitHub Actions CI/CD Pipeline
+# Runs on every push to main branch
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # ===========================
+  # JOB 1: Test & Lint Frontend
+  # ===========================
+  test-frontend:
+    name: Test Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check HTML file exists
+        run: |
+          echo "✅ Checking frontend files..."
+          ls -la index.html style.css script.js
+          echo "✅ All frontend files present!"
+
+      - name: Check for TODO markers (basic lint)
+        run: |
+          echo "🔍 Scanning for leftover TODOs..."
+          if grep -r "YOUR-BACKEND-NAME" script.js; then
+            echo "⚠️  Warning: Remember to update the backend URL in script.js"
+          fi
+          echo "✅ Frontend check complete!"
+
+  # ===========================
+  # JOB 2: Test Backend
+  # ===========================
+  test-backend:
+    name: Test Backend
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check server file syntax
+        run: node --check server.js && echo "✅ server.js syntax OK!"
+
+      - name: Verify package.json
+        run: |
+          echo "📦 Package info:"
+          cat package.json
+          echo "✅ Backend check complete!"
+
+  # ===========================
+  # JOB 3: Deploy to GitHub Pages
+  # ===========================
+  deploy-frontend:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: [test-frontend]   # Only deploy if tests pass
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload frontend as GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'       # Uploads the root folder (where index.html lives)
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Deployment success
+        run: echo "🚀 Frontend deployed to GitHub Pages!"
