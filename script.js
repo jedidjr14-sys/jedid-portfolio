@@ -119,7 +119,11 @@ document.querySelectorAll('.skill-category').forEach(el => barObserver.observe(e
 // ⚠️ IMPORTANT: Replace this URL with your actual Render.com backend URL
 // after deploying the Node.js backend. Example:
 // const BACKEND_URL = 'https://your-app-name.onrender.com/api/contact';
-const BACKEND_URL = 'https://YOUR-BACKEND-NAME.onrender.com/api/contact';
+// ===========================
+// CONTACT FORM SUBMISSION
+// ===========================
+
+const BACKEND_URL = 'https://jedid-portfolio.onrender.com/api/contact';
 
 const form = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
@@ -138,6 +142,31 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
+  submitBtn.disabled = true;
+  btnText.textContent = 'Sending...';
+
+  try {
+    const response = await fetch(BACKEND_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      showStatus('✓ Message sent successfully!', 'success');
+      form.reset();
+    } else {
+      showStatus(`Error: ${data.error || 'Something went wrong.'}`, 'error');
+    }
+  } catch (err) {
+    showStatus('Connection error. Please try again later.', 'error');
+  } finally {
+    submitBtn.disabled = false;
+    btnText.textContent = 'Send Message →';
+  }
+});
   // Disable button and show loading
   submitBtn.disabled = true;
   btnText.textContent = 'Sending...';
