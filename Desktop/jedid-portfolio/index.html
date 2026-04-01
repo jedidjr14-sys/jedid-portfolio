@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jedid Emmanuel Thomas | Cybersecurity Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- Animated background canvas -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <span class="bracket">[</span>JET<span class="bracket">]</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#workflow">Workflow</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      <span class="status-text">SECURE CONNECTION</span>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">// BCA Student &amp; Developer</div>
+      <h1 class="hero-title">
+        <span class="glitch" data-text="JEDID">JEDID</span><br>
+        <span class="glitch accent" data-text="EMMANUEL">EMMANUEL</span><br>
+        <span class="hero-last">THOMAS</span>
+      </h1>
+      <p class="hero-subtitle">
+        <span class="typewriter" id="typewriter"></span><span class="cursor">_</span>
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects <span>→</span></a>
+        <a href="#contact" class="btn-secondary">Get In Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">3+</span><span class="stat-label">Projects</span></div>
+        <div class="stat-div">|</div>
+        <div class="stat"><span class="stat-num">BCA</span><span class="stat-label">Student</span></div>
+        <div class="stat-div">|</div>
+        <div class="stat"><span class="stat-num">2025</span><span class="stat-label">Batch</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hex-grid">
+        <div class="hex-item h1">HTML</div>
+        <div class="hex-item h2">CSS</div>
+        <div class="hex-item h3">JS</div>
+        <div class="hex-item h4">Node</div>
+        <div class="hex-item h5">Git</div>
+        <div class="hex-item h6">SQL</div>
+        <div class="hex-center">JET</div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about">
+    <div class="section-header">
+      <span class="section-tag">01 /</span>
+      <h2 class="section-title">About Me</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="terminal-card">
+          <div class="terminal-topbar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-title">about.exe</span>
+          </div>
+          <div class="terminal-body">
+            <p><span class="prompt">$</span> whoami</p>
+            <p class="output">Jedid Emmanuel Thomas</p>
+            <p><span class="prompt">$</span> cat bio.txt</p>
+            <p class="output">
+              I'm a <strong>BCA student</strong> passionate about building
+              secure, scalable web applications. I follow modern development
+              workflows — from writing clean code locally to deploying with
+              CI/CD pipelines on the cloud.
+            </p>
+            <p class="output">
+              My focus areas include <strong>full-stack development</strong>,
+              web security best practices, and creating tools that solve
+              real-world problems.
+            </p>
+            <p><span class="prompt">$</span> cat interests.txt</p>
+            <p class="output">Cybersecurity · Web Dev · Open Source · Cloud</p>
+            <p><span class="prompt blink">$</span> <span class="cursor-sm">▌</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="about-cards">
+        <div class="info-card">
+          <div class="ic-icon">🎓</div>
+          <div class="ic-text">
+            <h4>Education</h4>
+            <p>Bachelor of Computer Applications (BCA)</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="ic-icon">📍</div>
+          <div class="ic-text">
+            <h4>Location</h4>
+            <p>India</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="ic-icon">💡</div>
+          <div class="ic-text">
+            <h4>Focus</h4>
+            <p>Full-Stack Web Development</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="ic-icon">🔒</div>
+          <div class="ic-text">
+            <h4>Interests</h4>
+            <p>Web Security &amp; Cybersecurity</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="skills">
+    <div class="section-header">
+      <span class="section-tag">02 /</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3 class="cat-title"><span class="cat-icon">◈</span> Frontend</h3>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <span>HTML5</span>
+            <div class="bar"><div class="bar-fill" data-w="90"></div></div>
+            <span class="pct">90%</span>
+          </div>
+          <div class="skill-bar-item">
+            <span>CSS3</span>
+            <div class="bar"><div class="bar-fill" data-w="80"></div></div>
+            <span class="pct">80%</span>
+          </div>
+          <div class="skill-bar-item">
+            <span>JavaScript</span>
+            <div class="bar"><div class="bar-fill" data-w="75"></div></div>
+            <span class="pct">75%</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3 class="cat-title"><span class="cat-icon">◈</span> Backend</h3>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <span>Node.js</span>
+            <div class="bar"><div class="bar-fill" data-w="70"></div></div>
+            <span class="pct">70%</span>
+          </div>
+          <div class="skill-bar-item">
+            <span>Express.js</span>
+            <div class="bar"><div class="bar-fill" data-w="65"></div></div>
+            <span class="pct">65%</span>
+          </div>
+          <div class="skill-bar-item">
+            <span>PostgreSQL</span>
+            <div class="bar"><div class="bar-fill" data-w="60"></div></div>
+            <span class="pct">60%</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3 class="cat-title"><span class="cat-icon">◈</span> DevOps &amp; Tools</h3>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <span>Git &amp; GitHub</span>
+            <div class="bar"><div class="bar-fill" data-w="80"></div></div>
+            <span class="pct">80%</span>
+          </div>
+          <div class="skill-bar-item">
+            <span>CI/CD (GitHub Actions)</span>
+            <div class="bar"><div class="bar-fill" data-w="65"></div></div>
+            <span class="pct">65%</span>
+          </div>
+          <div class="skill-bar-item">
+            <span>VS Code</span>
+            <div class="bar"><div class="bar-fill" data-w="85"></div></div>
+            <span class="pct">85%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tech-tags">
+      <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+      <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span>
+      <span class="tag">Git</span><span class="tag">GitHub Actions</span><span class="tag">Render</span>
+      <span class="tag">GitHub Pages</span><span class="tag">REST API</span><span class="tag">VS Code</span>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="projects">
+    <div class="section-header">
+      <span class="section-tag">03 /</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card featured">
+        <div class="pc-header">
+          <div class="pc-dots"><span></span><span></span><span></span></div>
+          <span class="pc-tag">FEATURED</span>
+        </div>
+        <div class="pc-body">
+          <h3>This Portfolio Website</h3>
+          <p>A cybersecurity-themed portfolio with full-stack architecture — HTML/CSS/JS frontend hosted on GitHub Pages, Node.js + PostgreSQL backend on Render, CI/CD via GitHub Actions.</p>
+          <div class="pc-tech">
+            <span>HTML</span><span>CSS</span><span>Node.js</span><span>PostgreSQL</span><span>GitHub Actions</span>
+          </div>
+        </div>
+        <div class="pc-footer">
+          <a href="https://github.com/jedid-emmanuel" class="pc-link" target="_blank">GitHub →</a>
+          <a href="#" class="pc-link live">Live Demo →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="pc-header">
+          <div class="pc-dots"><span></span><span></span><span></span></div>
+          <span class="pc-tag">WEB APP</span>
+        </div>
+        <div class="pc-body">
+          <h3>Secure Contact System</h3>
+          <p>A contact form with backend validation, spam protection, and PostgreSQL storage. REST API built with Express.js and deployed on Render.</p>
+          <div class="pc-tech">
+            <span>Express.js</span><span>PostgreSQL</span><span>REST API</span>
+          </div>
+        </div>
+        <div class="pc-footer">
+          <a href="https://github.com/jedid-emmanuel" class="pc-link" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="pc-header">
+          <div class="pc-dots"><span></span><span></span><span></span></div>
+          <span class="pc-tag">COMING SOON</span>
+        </div>
+        <div class="pc-body">
+          <h3>Project Slot #3</h3>
+          <p>Your next project goes here. Add your own description, tech stack, and links as you build more things!</p>
+          <div class="pc-tech">
+            <span>TBD</span>
+          </div>
+        </div>
+        <div class="pc-footer">
+          <span class="pc-link muted">In Progress...</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WORKFLOW SECTION -->
+  <section id="workflow" class="workflow">
+    <div class="section-header">
+      <span class="section-tag">04 /</span>
+      <h2 class="section-title">Dev Workflow</h2>
+      <div class="section-line"></div>
+    </div>
+    <p class="workflow-subtitle">HOD's Modern Web Development Workflow — implemented in this very project</p>
+    <div class="workflow-diagram">
+      <div class="wf-step" data-step="1">
+        <div class="wf-icon">💻</div>
+        <div class="wf-label">Local Git Repo</div>
+        <div class="wf-desc">Write code in VS Code. Commit changes with Git.</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step" data-step="2">
+        <div class="wf-icon">🐙</div>
+        <div class="wf-label">GitHub</div>
+        <div class="wf-desc">Push to remote repository. Version control in the cloud.</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step" data-step="3">
+        <div class="wf-icon">⚙️</div>
+        <div class="wf-label">CI/CD Pipeline</div>
+        <div class="wf-desc">GitHub Actions runs tests and linting automatically on every push.</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step" data-step="4">
+        <div class="wf-icon">☁️</div>
+        <div class="wf-label">Hosting</div>
+        <div class="wf-desc">Frontend → GitHub Pages. Backend + DB → Render.com.</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step" data-step="5">
+        <div class="wf-icon">🌐</div>
+        <div class="wf-label">Web Browser</div>
+        <div class="wf-desc">Live for the world to see!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact">
+    <div class="section-header">
+      <span class="section-tag">05 /</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Let's Connect</h3>
+        <p>Have a project in mind or want to collaborate? Send me a message and I'll get back to you!</p>
+        <div class="contact-links">
+          <a href="https://github.com/jedid-emmanuel" target="_blank" class="c-link">
+            <span class="c-icon">⌂</span> GitHub
+          </a>
+          <a href="mailto:jedid@example.com" class="c-link">
+            <span class="c-icon">✉</span> Email Me
+          </a>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required/>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span id="btnText">Send Message →</span>
+          </button>
+          <div id="formStatus" class="form-status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <span class="footer-logo">[JET]</span>
+      <span class="footer-text">© 2025 Jedid Emmanuel Thomas · Built with ❤️ &amp; lots of ☕</span>
+      <span class="footer-stack">HTML · CSS · JS · Node · PostgreSQL</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
