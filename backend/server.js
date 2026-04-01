@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors({
   origin: [
-    'https://YOUR-GITHUB-USERNAME.github.io',  // ← Replace with your GitHub Pages URL
-    'http://localhost:5500',                    // VS Code Live Server
+    'https://jedidjr14-sys.github.io',  // ✅ your GitHub Pages URL
+    'http://localhost:5500',
     'http://127.0.0.1:5500',
   ],
   methods: ['GET', 'POST'],
@@ -27,10 +27,12 @@ app.use(cors({
 // ===========================
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  ssl: process.env.NODE_ENV === 'production'
+    ? { rejectUnauthorized: false }
+    : false,
 });
 
-// Create table on startup if it doesn't exist
+// Create table if not exists
 async function initDB() {
   try {
     await pool.query(`
@@ -59,62 +61,44 @@ app.get('/', (req, res) => {
   res.json({
     status: 'online',
     message: "Jedid's Portfolio API is running 🚀",
-    endpoints: {
-      health: 'GET /',
-      submit_contact: 'POST /api/contact',
-      get_messages: 'GET /api/messages',
-    },
   });
 });
 
-// POST /api/contact — Save a contact message
+// POST /api/contact
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
 
-  // Basic validation
   if (!name || !email || !message) {
-    return res.status(400).json({ error: 'All fields (name, email, message) are required.' });
-  }
-
-  if (name.length > 100) return res.status(400).json({ error: 'Name too long.' });
-  if (email.length > 150) return res.status(400).json({ error: 'Email too long.' });
-
-  // Simple email format check
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: 'Invalid email format.' });
+    return res.status(400).json({ error: 'All fields required.' });
   }
 
   try {
     const result = await pool.query(
-      'INSERT INTO contact_messages (name, email, message) VALUES ($1, $2, $3) RETURNING id, created_at',
+      'INSERT INTO contact_messages (name, email, message) VALUES ($1, $2, $3) RETURNING id',
       [name, email, message]
     );
 
-    console.log(`📨 New message from ${name} (${email}) — ID #${result.rows[0].id}`);
-
     res.status(201).json({
       success: true,
-      message: 'Message received! Thank you for reaching out.',
+      message: 'Message saved!',
       id: result.rows[0].id,
     });
 
   } catch (err) {
     console.error('DB error:', err.message);
-    res.status(500).json({ error: 'Server error. Please try again later.' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
-// GET /api/messages — View all messages (for admin use)
+// GET /api/messages
 app.get('/api/messages', async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT id, name, email, message, created_at FROM contact_messages ORDER BY created_at DESC'
+      'SELECT * FROM contact_messages ORDER BY created_at DESC'
     );
-    res.json({ count: result.rows.length, messages: result.rows });
+    res.json(result.rows);
   } catch (err) {
-    console.error('DB error:', err.message);
-    res.status(500).json({ error: 'Could not fetch messages.' });
+    res.status(500).json({ error: 'Fetch error' });
   }
 });
 
@@ -123,5 +107,4 @@ app.get('/api/messages', async (req, res) => {
 // ===========================
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
